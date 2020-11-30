@@ -1,0 +1,71 @@
+---
+# tasks file for cp_engine
+  - name: create a network
+    gcp_compute_network:
+      name: network-instance
+      project: forward-liberty-267311
+      auth_kind: serviceaccount
+      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
+      state: present
+    register: network
+
+  - name: create a address
+    gcp_compute_address:
+      name: address-instance
+      region: us-central1
+      project: forward-liberty-267311
+      auth_kind: serviceaccount
+      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
+      state: present
+    register: address
+
+  - name: create a web server
+    gcp_compute_instance:
+      name: web-server
+      machine_type: e2-micro
+      disks:
+      - auto_delete: 'true'
+        boot: 'true'
+        initialize_params:
+          source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
+      network_interfaces:
+      - network: "{{ network }}"
+      zone: us-central1-a
+      project: forward-liberty-267311
+      auth_kind: serviceaccount
+      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
+      state: present
+
+  - name: create a web server 2
+    gcp_compute_instance:
+      name: web-server2
+      machine_type: e2-micro
+      disks:
+      - auto_delete: 'true'
+        boot: 'true'
+        initialize_params:
+          source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
+      network_interfaces:
+      - network: "{{ network }}"
+      zone: us-central1-a
+      project: forward-liberty-267311
+      auth_kind: serviceaccount
+      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
+      state: present
+  
+  - name: create a db server
+    gcp_compute_instance:
+      name: db-server
+      machine_type: e2-micro
+      disks:
+      - auto_delete: 'true'
+        boot: 'true'
+        initialize_params:
+          source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
+      network_interfaces:
+      - network: "{{ network }}"
+      zone: us-central1-a
+      project: forward-liberty-267311
+      auth_kind: serviceaccount
+      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
+      state: present
