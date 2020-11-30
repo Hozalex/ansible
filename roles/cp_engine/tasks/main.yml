@@ -1,23 +1,24 @@
 ---
 # tasks file for cp_engine
-  - name: create a network
-    gcp_compute_network:
-      name: network-instance
-      project: forward-liberty-267311
-      auth_kind: serviceaccount
-      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
-      state: present
-    register: network
 
-  - name: create a address
-    gcp_compute_address:
-      name: address-instance
-      region: us-central1
-      project: forward-liberty-267311
-      auth_kind: serviceaccount
-      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
-      state: present
-    register: address
+  # - name: create a network
+  #   gcp_compute_network:
+  #     name: network-instance
+  #     project: forward-liberty-267311
+  #     auth_kind: serviceaccount
+  #     service_account_file: {{ service_account_file }}
+  #     state: present
+  #   register: network
+
+  # - name: create a address
+  #   gcp_compute_address:
+  #     name: address-instance
+  #     region: us-central1
+  #     project: forward-liberty-267311
+  #     auth_kind: serviceaccount
+  #     service_account_file: {{ service_account_file }}
+  #     state: present
+  #   register: address
 
   - name: create a web server
     gcp_compute_instance:
@@ -29,11 +30,13 @@
         initialize_params:
           source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
       network_interfaces:
-      - network: "{{ network }}"
+      - access_configs:
+        - name: Network Access
+          type: ONE_TO_ONE_NAT
       zone: us-central1-a
       project: forward-liberty-267311
       auth_kind: serviceaccount
-      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
+      service_account_file: "{{ service_account_file }}"
       state: present
 
   - name: create a web server 2
@@ -46,11 +49,13 @@
         initialize_params:
           source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
       network_interfaces:
-      - network: "{{ network }}"
+      - access_configs:
+        - name: Network Access
+          type: ONE_TO_ONE_NAT
       zone: us-central1-a
       project: forward-liberty-267311
       auth_kind: serviceaccount
-      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
+      service_account_file: "{{ service_account_file }}"
       state: present
   
   - name: create a db server
@@ -63,9 +68,11 @@
         initialize_params:
           source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
       network_interfaces:
-      - network: "{{ network }}"
+      - access_configs:
+        - name: Network Access
+          type: ONE_TO_ONE_NAT
       zone: us-central1-a
       project: forward-liberty-267311
       auth_kind: serviceaccount
-      service_account_file: "/home/dobi/.ssh/forward-liberty-267311-e04a937fc5c3.json"
+      service_account_file: "{{ service_account_file }}"
       state: present

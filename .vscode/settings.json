@@ -1,0 +1,10 @@
+{
+    "ansible.fileCopyConfig": [
+        {
+            "server": "10.10.1.5",
+            "sourcePath": "c:\\Users\\kav1302\\ansible/",
+            "targetPath": "ansible/",
+            "copyOnSave": true
+        }
+    ]
+}
