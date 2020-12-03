@@ -33,11 +33,12 @@
       - access_configs:
         - name: Network Access
           type: ONE_TO_ONE_NAT
-      zone: us-central1-a
-      project: forward-liberty-267311
-      auth_kind: serviceaccount
+      zone: "{{ zone }}"
+      project: "{{ project }}"
+      auth_kind: "{{ auth_kind }}"
       service_account_file: "{{ service_account_file }}"
       state: present
+    register: web-server
 
   - name: create a web server 2
     gcp_compute_instance:
@@ -52,11 +53,12 @@
       - access_configs:
         - name: Network Access
           type: ONE_TO_ONE_NAT
-      zone: us-central1-a
-      project: forward-liberty-267311
-      auth_kind: serviceaccount
+      zone: "{{ zone }}"
+      project: "{{ project }}"
+      auth_kind: "{{ auth_kind }}"
       service_account_file: "{{ service_account_file }}"
       state: present
+    register: web-server2
   
   - name: create a db server
     gcp_compute_instance:
@@ -71,8 +73,9 @@
       - access_configs:
         - name: Network Access
           type: ONE_TO_ONE_NAT
-      zone: us-central1-a
-      project: forward-liberty-267311
-      auth_kind: serviceaccount
+      zone: "{{ zone }}"
+      project: "{{ project }}"
+      auth_kind: "{{ auth_kind }}"
       service_account_file: "{{ service_account_file }}"
       state: present
+    register: db-server

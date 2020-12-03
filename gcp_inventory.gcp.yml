@@ -1,0 +1,7 @@
+plugin: gcp_compute
+projects:
+  - forward-liberty-267311
+hostnames:
+  - web-server
+auth_kind: serviceaccount
+service_account_file: ./forward-liberty-267311-69e3846f1519.json
