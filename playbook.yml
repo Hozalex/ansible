@@ -1,14 +1,14 @@
 - 
-  name: Create VMs Engine
+  name: Create VMs Network
   hosts: localhost
   roles:
     - cp_engine
 
-- 
-  name: Install Python
+-
+  name: Deploy Database
   hosts: localhost
   roles:
-    - python
+    - db_servers
 
 -
   name: Deploy web_server
@@ -16,8 +16,8 @@
   roles:
     - web_servers
 
--
-  name: Deploy Database
-  hosts: db_servers
+- 
+  name: Install Python
+  hosts: localhost
   roles:
-    - db_servers
+    - python
