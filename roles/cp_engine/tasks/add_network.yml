@@ -1,21 +1,21 @@
 ---
 # tasks file for cp_engine
 
-  - name: create a network
-    gcp_compute_network:
-      name: ansible-network
-      project: "{{ project }}"
-      auth_kind: "{{ auth_kind }}"
-      service_account_file: "{{ service_account_file }}"
-      state: present
-    register: network
+  # - name: create a network
+  #   gcp_compute_network:
+  #     name: ansible-network
+  #     project: "{{ project }}"
+  #     auth_kind: "{{ auth_kind }}"
+  #     service_account_file: "{{ service_account_file }}"
+  #     state: present
+  #   register: network
 
   - name: create a address
     gcp_compute_address:
       name: address-instance
-      region: us-central1
-      project: forward-liberty-267311
-      auth_kind: serviceaccount
-      service_account_file: {{ service_account_file }}
+      region: "{{ region }}"
+      project: "{{ project }}"
+      auth_kind: "{{ serviceaccount }}"
+      service_account_file: "{{ service_account_file }}"
       state: present
     register: address

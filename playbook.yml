@@ -1,23 +1,25 @@
-- 
-  name: Create VMs Network
-  hosts: localhost
-  roles:
-    - cp_engine
+# - 
+#   name: Create VMs Network
+#   hosts: localhost
+#   roles:
+#     - cp_engine
 
 -
   name: Deploy Database
   hosts: localhost
+  vars_files: 
+    - ./common-vars.yml
   roles:
     - db_servers
 
--
-  name: Deploy web_server
-  hosts: localhost
-  roles:
-    - web_servers
+# -
+#   name: Deploy web_server
+#   hosts: localhost
+#   roles:
+#     - web_servers
 
-- 
-  name: Install Python
-  hosts: localhost
-  roles:
-    - python
+# - 
+#   name: Install Python
+#   hosts: localhost
+#   roles:
+#     - python

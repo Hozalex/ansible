@@ -1,2 +1,38 @@
 ---
-# tasks file for db_servers
+  - name: create a db server
+    gcp_compute_instance:
+      name: db-server
+      machine_type: e2-micro
+      disks:
+      - auto_delete: 'true'
+        boot: 'true'
+        initialize_params:
+          source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
+      network_interfaces:
+        - network: null
+        - access_configs:
+          - name: Network Access
+            type: 'ONE_TO_ONE_NAT'
+      zone: "{{ zone }}"
+      project: "{{ project }}"
+      auth_kind: "{{ auth_kind }}"
+      service_account_file: "{{ service_account_file }}"
+      state: present
+    register: db_server_instance
+
+  - name: Add home dirs to the backup spooler
+    debug:
+      msg: "{{ db_server_instance['networkInterfaces'][0] }}"
+
+  
+  # - name: Wait for SSH
+  #   wait_for: 
+  #     delay: 1 
+  #     host: "{{ db_server_instance.networkInterfaces.accessConfigs[2] }}"
+  #     port: 22 
+  #     state: started 
+  #     timeout: 30
+  # - name: Save host data
+  #   add_host: 
+  #     hostname: "{{ db_server_instance.networkInterfaces.accessConfigs.natIP }}" 
+  #     groupname: db_ips
