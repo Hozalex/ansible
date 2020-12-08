@@ -5,4 +5,4 @@ zones:
   - "europe-north1-c"
 filters: []
 auth_kind: serviceaccount
-service_account_file: "./ansible.json"
+service_account_file: "./ansible_key.json"
