@@ -1,9 +1,0 @@
-[localhost]
-127.0.0.1
-
-[localhost:vars]
-service_account_file=./forward-liberty-267311-69e3846f1519.json
-zone=europe-north1-c
-project=forward-liberty-267311
-auth_kind=serviceaccount
-region=europe-north1

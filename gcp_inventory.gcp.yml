@@ -1,7 +1,8 @@
 plugin: gcp_compute
 projects:
   - forward-liberty-267311
-hostnames:
-  - web-server
+zones:
+  - "europe-north1-c"
+filters: []
 auth_kind: serviceaccount
-service_account_file: ./forward-liberty-267311-69e3846f1519.json
+service_account_file: "./ansible.json"

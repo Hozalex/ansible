@@ -32,6 +32,7 @@
       port: 22 
       state: started 
       timeout: 60
+      
   - name: Save host data
     add_host: 
       hostname: "{{ db_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}" 
