@@ -22,17 +22,17 @@
 
   - name: Add home dirs to the backup spooler
     debug:
-      msg: "{{ db_server_instance['networkInterfaces'][0] }}"
+      msg: "{{ db_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}"
 
   
-  # - name: Wait for SSH
-  #   wait_for: 
-  #     delay: 1 
-  #     host: "{{ db_server_instance.networkInterfaces.accessConfigs[2] }}"
-  #     port: 22 
-  #     state: started 
-  #     timeout: 30
-  # - name: Save host data
-  #   add_host: 
-  #     hostname: "{{ db_server_instance.networkInterfaces.accessConfigs.natIP }}" 
-  #     groupname: db_ips
+  - name: Wait for SSH
+    wait_for: 
+      delay: 1 
+      host: "{{ db_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP']}}"
+      port: 22 
+      state: started 
+      timeout: 30
+  - name: Save host data
+    add_host: 
+      hostname: "{{ db_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}" 
+      groupname: db_ips
