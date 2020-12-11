@@ -15,7 +15,8 @@
     - web_servers
 
 - name: Install common app
-  become: true
+  become: True
+  gather_facts: True
   hosts: 
     - web_ips
     - db_ips

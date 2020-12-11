@@ -6,3 +6,5 @@ zones:
 filters: []
 auth_kind: serviceaccount
 service_account_file: "./ansible_key.json"
+ansible_user: hozalex
+ansible_ssh_private_key_file: ~/.ssh/id_rsa

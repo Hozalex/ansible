@@ -14,6 +14,8 @@
           - name: Network Access
             type: 'ONE_TO_ONE_NAT'
       deletion_protection: 'true'
+      metadata:
+        enable_oslogin: 'true'
       zone: "{{ zone }}"
       project: "{{ project }}"
       auth_kind: "{{ auth_kind }}"
