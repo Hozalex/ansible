@@ -14,8 +14,10 @@
   roles:
     - web_servers
 
-# - 
-#   name: Install Python
-#   hosts: localhost
-#   roles:
-#     - python
+- name: Install common app
+  become: true
+  hosts: 
+    - web_ips
+    - db_ips
+  roles:
+    - install_dependences

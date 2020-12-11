@@ -38,3 +38,8 @@
     add_host: 
       hostname: "{{ db_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}" 
       groupname: db_ips
+
+  - name: update os
+    apt:
+      update_cache: true
+      upgrade: safe
