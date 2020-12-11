@@ -1,5 +1,5 @@
 service_account_file: ./ansible_key.json
 zone: europe-north1-c
-project: forward-liberty-267311
+project: webapp-298217
 auth_kind: serviceaccount
 region: europe-north1

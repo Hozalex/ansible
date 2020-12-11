@@ -1,6 +1,6 @@
 plugin: gcp_compute
 projects:
-  - forward-liberty-267311
+  - webapp-298217
 zones:
   - "europe-north1-c"
 filters: []
