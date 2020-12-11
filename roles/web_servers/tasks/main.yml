@@ -1,3 +1,40 @@
 ---
-# tasks file for web_servers
+  - name: create a web server
+    google.cloud.gcp_compute_instance:
+      name: web-server
+      machine_type: e2-micro
+      disks:
+      - auto_delete: 'true'
+        boot: 'true'
+        initialize_params:
+          source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
+      network_interfaces:
+        - network: null
+        - access_configs:
+          - name: Network Access
+            type: 'ONE_TO_ONE_NAT'
+      deletion_protection: 'true'
+      zone: "{{ zone }}"
+      project: "{{ project }}"
+      auth_kind: "{{ auth_kind }}"
+      service_account_file: "{{ service_account_file }}"
+      state: present
+    register: web_server_instance
 
+  - name: ip message
+    debug:
+      msg: "web_instance's ip - {{ web_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}"
+
+  
+  - name: Wait for SSH
+    wait_for: 
+      delay: 10
+      host: "{{ web_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP']}}"
+      port: 22 
+      state: started 
+      timeout: 60
+      
+  - name: Save host data
+    add_host: 
+      hostname: "{{ web_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}" 
+      groupname: web_ips

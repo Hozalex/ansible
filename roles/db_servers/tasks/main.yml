@@ -1,6 +1,6 @@
 ---
   - name: create a db server
-    gcp_compute_instance:
+    google.cloud.gcp_compute_instance:
       name: db-server
       machine_type: e2-micro
       disks:
@@ -13,6 +13,7 @@
         - access_configs:
           - name: Network Access
             type: 'ONE_TO_ONE_NAT'
+      deletion_protection: 'true'
       zone: "{{ zone }}"
       project: "{{ project }}"
       auth_kind: "{{ auth_kind }}"
@@ -20,9 +21,9 @@
       state: present
     register: db_server_instance
 
-  - name: Add home dirs to the backup spooler
+  - name: ip message
     debug:
-      msg: "{{ db_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}"
+      msg: "db_instance's ip - {{ db_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}"
 
   
   - name: Wait for SSH
