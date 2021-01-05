@@ -27,7 +27,6 @@
     debug:
       msg: "db_instance's ip - {{ db_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}"
 
-  
   - name: Wait for SSH
     wait_for: 
       delay: 10

@@ -1,8 +1,0 @@
-plugin: gcp_compute
-projects:
-  - webapp-298217
-zones:
-  - "europe-north1-c"
-filters: []
-# auth_kind: serviceaccount
-# service_account_file: "./ansible_key.json"

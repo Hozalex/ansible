@@ -1,14 +1,12 @@
-  - name: wait for ssh
-    wait_for_connection:
-      delay: 5
-      timeout: 300
-      
-  - name: update os
+  - name: update apt
     apt:
-      update_cache: true
+      update_cache: yes
+      cache_valid_time: 3600
       upgrade: safe
-
+      sudo: yes 
+      
   - name: install python
     apt:
       name: python
       state: present
+      sudo: yes

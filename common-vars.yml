@@ -1,5 +1,7 @@
 service_account_file: ./ansible_key.json
+service_account_email: 810408125807-compute@developer.gserviceaccount.com
 zone: europe-north1-c
 project: webapp-298217
 auth_kind: serviceaccount
 region: europe-north1
+gcp_user: hozalex

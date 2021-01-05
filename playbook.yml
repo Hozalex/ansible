@@ -15,7 +15,8 @@
     - web_servers
 
 - name: Install common app
-  become: True
+  become: yes
+  become_method: sudo
   gather_facts: True
   hosts: 
     - web_ips
