@@ -14,6 +14,8 @@
           - name: Network Access
             type: 'ONE_TO_ONE_NAT'
       deletion_protection: 'true'
+      labels:
+        environment: db      
       metadata:
         enable_oslogin: 'true'
       zone: "{{ zone }}"

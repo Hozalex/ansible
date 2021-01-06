@@ -1,7 +1,7 @@
 ---
   - name: create a web server
     google.cloud.gcp_compute_instance:
-      name: web-server
+      name: "{{ item }}"
       machine_type: e2-micro
       disks:
       - auto_delete: 'true'
@@ -14,6 +14,10 @@
           - name: Network Access
             type: 'ONE_TO_ONE_NAT'
       deletion_protection: 'true'
+      labels:
+        environment: web
+      tags: 
+        items: "web" 
       metadata:
         enable_oslogin: 'true'
       zone: "{{ zone }}"
@@ -21,13 +25,27 @@
       auth_kind: "{{ auth_kind }}"
       service_account_file: "{{ service_account_file }}"
       state: present
+    with_items:
+      - web-server-1
+      - web-server-2
     register: web_server_instance
+
+  - name: create firewall rule
+    gce_net:
+      name: default
+      fwname: "http"
+      allowed: tcp:80
+      project_id: "{{ project }}"
+      credentials_file: "{{ service_account_file }}"
+      service_account_email: "{{ service_account_email }}"
+      state: present
+      target_tags: "web"
+      src_range: '0.0.0.0/0'
 
   - name: ip message
     debug:
       msg: "web_instance's ip - {{ web_server_instance['networkInterfaces'][0]['accessConfigs'][0]['natIP'] }}"
 
-  
   - name: Wait for SSH
     wait_for: 
       delay: 10
